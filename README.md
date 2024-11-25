@@ -107,17 +107,19 @@ Using {metric} distance:")
     print(f"Misclassified Samples: {sum(y_test != y_pred) / len(y_pred):.2f}")
 ```
 ## Results
-Using euclidean distance:
+-- Using euclidean distance:
 Cross-Validation Accuracy: 1.00
 Number of misclassified samples (euclidean): 0.0
 
-Using manhattan distance:
+-- Using manhattan distance:
 Cross-Validation Accuracy: 1.00
 Number of misclassified samples (manhattan): 0.0
 
-Using cosine distance:
+-- Using cosine distance:
 Cross-Validation Accuracy: 1.00
 Number of misclassified samples (cosine): 0.0
+
+
 ---
 
 ### Decision Tree Classifier
