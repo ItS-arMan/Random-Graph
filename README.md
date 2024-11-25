@@ -53,26 +53,30 @@ Creating three types of random graphs (Erdos-Renyi, Watts-Strogatz, and Barabasi
 ```python
 def extract_features_for_graphs(graph_list, model_name):
     features = []
-    for G in graph_list:
+    for i, G in enumerate(graph_list):
         graph_features = feature_extraction(G)
-        graph_features["Graph Model"] = model_name
+        graph_features["Graph Model"] = f"{model_name}"
         features.append(graph_features)
+
     return pd.DataFrame(features)
 
-# Generate 50 graphs for each model
-erdos_renyi_graphs = [nx.erdos_renyi_graph(r.randint(300, 500), 0.6) for _ in range(50)]
-watts_strogatz_graphs = [nx.watts_strogatz_graph(r.randint(300, 500), r.choice(range(4, 20, 2)), r.uniform(0.5, 0.7)) for _ in range(50)]
-barabasi_albert_graphs = [nx.barabasi_albert_graph(r.randint(300, 500), r.randint(10, 90)) for _ in range(50)]
+# Generating 150 random graphs
+# N: between 300 and 500, p: 0.6
+erdos_renyi_graphs = [nx.erdos_renyi_graph(r.randint(300, 500), 0.6) for i in range(50)]
 
-# Extract features
+# N: between 300 and 500, p: even numbers between 4 and 20, k: between 0.5 and 0.7
+watts_strogatz_graphs = [nx.watts_strogatz_graph(r.randint(300, 500), r.choice(range(4, 20, 2)), r.uniform(0.5, 0.7))
+                         for j in range(50)]
+
+# N: between 300 and 500, p: between 10 and 90
+barabasi_albert_graphs = [nx.barabasi_albert_graph(r.randint(300, 500), r.randint(10, 90)) for k in range(50)]
+
 erdos_renyi_features = extract_features_for_graphs(erdos_renyi_graphs, "Erdos-Renyi")
 watts_strogatz_features = extract_features_for_graphs(watts_strogatz_graphs, "Watts-Strogatz")
 barabasi_albert_features = extract_features_for_graphs(barabasi_albert_graphs, "Barabasi-Albert")
 
-# Combine all features
 all_features = pd.concat([erdos_renyi_features, watts_strogatz_features, barabasi_albert_features], ignore_index=True)
 
-# Save to Excel
 all_features.to_excel("graph_features.xlsx", index=False)
 ```
 
@@ -106,7 +110,7 @@ Using {metric} distance:")
     print(f"Cross-Validation Accuracy: {scores.mean():.2f}")
     print(f"Misclassified Samples: {sum(y_test != y_pred) / len(y_pred):.2f}")
 ```
-## Results
+#### Results
 -- Using euclidean distance:
 Cross-Validation Accuracy: 1.00
 Number of misclassified samples (euclidean): 0.0
@@ -139,7 +143,7 @@ print("
 Decision Tree Feature Importance:
 ", importance)
 ```
-## Results 
+#### Results 
 | Feature                  | Importance |
 |--------------------------|------------|
 | Number of Nodes          | 0.000000   |
