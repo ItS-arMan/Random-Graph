@@ -1,10 +1,3 @@
-
-# Graph Analysis and Machine Learning Pipeline
-
-This document outlines the steps to analyze graph structures and apply machine learning techniques using Python.
-
----
-
 ## Importing Libraries
 
 ```python
@@ -25,7 +18,6 @@ from sklearn.tree import DecisionTreeClassifier
 
 ## Feature Extraction
 
-The `feature_extraction` function calculates key graph metrics like average degree, density, and centralization measures.
 
 ```python
 def feature_extraction(graph):
@@ -56,7 +48,7 @@ def feature_extraction(graph):
 
 ## Generating Graph Datasets
 
-We create three types of random graphs (Erdős-Rényi, Watts-Strogatz, and Barabási-Albert) and extract their features.
+Creating three types of random graphs (Erdos-Renyi, Watts-Strogatz, and Barabasi-Albert) and extract their features.
 
 ```python
 def extract_features_for_graphs(graph_list, model_name):
@@ -90,7 +82,7 @@ all_features.to_excel("graph_features.xlsx", index=False)
 
 ### K-Nearest Neighbors (KNN)
 
-We standardize the features and evaluate KNN with three distance metrics: **Euclidean**, **Manhattan**, and **Cosine**.
+Standardizeing the features and evaluate KNN with three distance metrics: **Euclidean**, **Manhattan**, and **Cosine**.
 
 ```python
 stand_features = StandardScaler().fit_transform(all_features.iloc[:, :-1].values)
@@ -114,7 +106,18 @@ Using {metric} distance:")
     print(f"Cross-Validation Accuracy: {scores.mean():.2f}")
     print(f"Misclassified Samples: {sum(y_test != y_pred) / len(y_pred):.2f}")
 ```
+## Results
+Using euclidean distance:
+Cross-Validation Accuracy: 1.00
+Number of misclassified samples (euclidean): 0.0
 
+Using manhattan distance:
+Cross-Validation Accuracy: 1.00
+Number of misclassified samples (manhattan): 0.0
+
+Using cosine distance:
+Cross-Validation Accuracy: 1.00
+Number of misclassified samples (cosine): 0.0
 ---
 
 ### Decision Tree Classifier
@@ -134,7 +137,19 @@ print("
 Decision Tree Feature Importance:
 ", importance)
 ```
-
----
-
-This pipeline provides a foundation for analyzing graph data and applying machine learning models to classify graph structures.
+## Results 
+| Feature                  | Importance |
+|--------------------------|------------|
+| Number of Nodes          | 0.000000   |
+| Number of Edges          | 0.000000   |
+| Average Degree           | 0.000000   |
+| Diameter                  | 0.000000   |
+| Radius                  | 0.000000   |
+| Density                 | 0.501818   |
+| GCC                     | 0.000000   |
+| Average Closeness       | 0.498182   |
+| Average Betweenness     | 0.000000   |
+| Average PageRank        | 0.000000   |
+| Degree Variance         | 0.000000   |
+| Network Entropy         | 0.000000   |
+| Freeman Centralization  | 0.000000   |
